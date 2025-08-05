@@ -1,0 +1,28 @@
+Tipo test y preguntas teóricas sobre los 4 temas (4 opciones, 1 correcta, restan 1/4) (Cuenta el 40%)
+
+Parte práctica (Cuenta el 60%):
+Nos da la maquina virtual con los scripts y tablas ya creadas para comprobar si el comando elegido hace lo que esperamos y después escribirla en word/documento.
+
+Tema 1:
+Ejercicio crear MER o MERE
+La mayoría de las preguntas
+Consultas en bases de datos (crear tablas, PK, FK, restricciones)
+Manipulación de datos (update, insert)
+Consultas
+Normalización (Boletín)
+
+Tema 2:
+Consultas con comando "find" la gran mayoría
+2 ficheros json y hacer manipulación (update o delete) o consultas (comando "find")
+
+Tema 3:
+Pone una tabla/esquema y hacer una consulta (select "campo" ..., "indice -> hash, bitmap, etc.") e indicar el porqué de ese indice (p.e.: elijo este pq es un valor numérico que ...) o si no se necesita índice indicar el porqué tambien
+
+Algún ejercicio como los del boletin, consulta quering decir que indice seria mejor para optimizar esa consulta (disperso o no, harsh y porqué)
+
+
+
+
+Normalizar:
+1º Normalización: Todos los datos deben de ser atómicos (únicos) -> Solución: Un atributo multivaluada (con varios valores para la misma entidad, por ejemplo) deben de cambiarse a tablas nuevas para almacenar dichos valores
+2º Normalización: 

@@ -1,0 +1,7 @@
+MySQL: http://localhost:8080/
+user: admin
+password: admin
+
+
+mongoDB: http://localhost:5000/
+password: mongodb://172.17.0.1:27017

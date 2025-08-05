@@ -1,0 +1,10 @@
+use agencia_viajes;
+db.createCollection("cliente");
+{ _id:0001, nombre:"Juan", edad:30, genero:"Masculino", seguro_viaje:{_id:0001, caducidad:ISODate("2024-12-31"), precio:100.00, cancelacion:true, tipo: "Básico"} }
+{ _id:0002, nombre:"María", edad:24, genero:"Femenino", seguro_viaje:{_id:0002, caducidad:ISODate("2024-12-31"), precio:200.00, cancelacion:false, tipo: "A todo riesgo"} }
+db.createCollection("viaje");
+{ _id:0001, precio:500.00, duracion:ISODate("2024-06-15T10:00:00Z"), transporte:"Avión", nacional:{dni:"12345678A"}, paquete_vacacional:{_id:0001, n_destinos:1}, destinos:{pais:"España", alojamiento:"Hotel Playa"} }
+{ _id:0002, precio:300.00, duracion:ISODate("2024-07-20T08:00:00Z"), transporte:"Tren", internacional:{pasaporte:"XYZ789", visado:"En trámite"}, paquete_vacacional:{_id:0001, n_destinos:2}, destinos:[{pais:"Francia", alojamiento:"Cabaña Montaña"}, {pais:"Italia", alojamiento:"Apartamento Roma"}] }
+db.createCollection("actividad");
+{ _id:0001, duracion:ISODate("2024-06-16T14:00:00Z"), precio:50.00, guia:{nombre:"Pedro", edad:35, genero:"Masculino"} }
+{ _id:0002, duracion:ISODate("2024-07-21T09:00:00Z"), precio:30.00, guia:{nombre:"Ana", edad:28, genero:"Femenino"} }

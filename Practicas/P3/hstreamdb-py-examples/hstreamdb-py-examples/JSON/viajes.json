@@ -1,0 +1,43 @@
+[
+    {
+        "_id": "0001",
+        "precio": 500,
+        "duracion": "ISODate(\"2024-06-15T10:00:00Z\")",
+        "transporte": "Avión",
+        "nacional": {
+            "dni": "12345678A"
+        },
+        "paquete_vacacional": {
+            "_id": "0001",
+            "n_destinos": 1
+        },
+        "destinos": {
+            "pais": "España",
+            "alojamiento": "Hotel Playa"
+        }
+    },
+    {
+        "_id": "0002",
+        "precio": 300,
+        "duracion": "ISODate(\"2024-07-20T08:00:00Z\")",
+        "transporte": "Tren",
+        "internacional": {
+            "pasaporte": "XYZ789",
+            "visado": "En trámite"
+        },
+        "paquete_vacacional": {
+            "_id": "0001",
+            "n_destinos": 2
+        },
+        "destinos": [
+            {
+                "pais": "Francia",
+                "alojamiento": "Cabaña Montaña"
+            },
+            {
+                "pais": "Italia",
+                "alojamiento": "Apartamento Roma"
+            }
+        ]
+    }
+]

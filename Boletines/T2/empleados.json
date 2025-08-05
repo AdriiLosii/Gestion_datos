@@ -1,0 +1,45 @@
+{
+  _id: "34531234Y", 
+  nombre: "Pedro", 
+  apellidos: ["Sánchez", "Rodríguez"], 
+  salario: 1500, 
+  edad: 30, 
+  telefono: [{ prefijo:"+34", numero:"625544112", tipo:"movil"}, 
+             { numero:"983321145", tipo:"casa"}], 
+  sucursal:  { _id:"0001",direccion:"Avd Madrid nº1", 
+              ciudad:"Lugo", provincia:"Lugo", telefono:"882422115" } 
+}, 
+{ 
+  _id: "24973866J", 
+  nombre: "Miriam", 
+  apellidos: ["Sáez", "Díaz"], 
+  salario: 1800, 
+  edad: 35, 
+  telefono: [{ prefijo:"+34", numero:"625544112", tipo:"movil"}], 
+  sucursal: { _id:"0002",direccion:"Plaza de Pontevedra", 
+              ciudad:"A Coruña", provincia:"A Coruña",  
+              telefono:"981201415" } 
+}, 
+{ 
+  _id: "54789124F", 
+  nombre: "Ana", 
+  apellidos: ["Reyes", "González"], 
+  salario: 1350, 
+  edad: 41, 
+  telefono: [{ prefijo:"+34", numero:"631199874", tipo:"movil"}, 
+             { numero:"983321145", tipo:"casa"}], 
+  sucursal: { _id:"0003",direccion:"Plaza de España s/n", 
+              ciudad:"Madrid", provincia:"Madrid",  
+              telefono:"91812145" } 
+}, 
+{ 
+  _id: "47875123H", 
+  nombre: "María", 
+  apellidos: ["López", "Rodríguez"], 
+  salario: 2250, 
+  edad: 44, 
+  telefono: [{ prefijo:"+34", numero:"664477442", tipo:"movil"}], 
+  sucursal: { _id:"0003",direccion:"Plaza de España s/n", 
+              ciudad:"Madrid", provincia:"Madrid",  
+              telefono:"91812145" } 
+} 

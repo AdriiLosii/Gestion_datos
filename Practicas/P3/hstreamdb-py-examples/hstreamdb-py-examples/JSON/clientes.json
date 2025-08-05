@@ -1,0 +1,28 @@
+[
+    {
+        "_id": "0001",
+        "nombre": "Juan",
+        "edad": 30,
+        "genero": "Masculino",
+        "seguro_viaje": {
+            "_id": "0001",
+            "caducidad": "ISODate(\"2024-12-31\")",
+            "precio": 100,
+            "cancelacion": true,
+            "tipo": "Básico"
+        }
+    },
+    {
+        "_id": "0002",
+        "nombre": "María",
+        "edad": 24,
+        "genero": "Femenino",
+        "seguro_viaje": {
+            "_id": "0002",
+            "caducidad": "ISODate(\"2024-12-31\")",
+            "precio": 200,
+            "cancelacion": false,
+            "tipo": "A todo riesgo"
+        }
+    }
+]

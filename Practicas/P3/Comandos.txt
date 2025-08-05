@@ -1,0 +1,26 @@
+docker-compose -f [archivo] up -d -> Iniciar contenedores
+docker ps 
+docker-compose down -> Parar contenedores
+docker volume prune -> Eliminar volumenes dados
+docker volume ls -> Mostrar volumenes
+docker run -it --rm --name some-hstream-cli --network host hstreamdb/hstream:latest hstream --port 6570 sql -> Arrancar cliente SQL (Si se utiliza Python, este paso no hace falta)
+scp  -P 2222 [archivo] xdr@localhost:/home/xdr -> Transferir archivos
+
+Pasos para ejecutar hstream con productor y cliente:
+MV:
+docker-compose -f [archivo] up -d -> Iniciar contenedores
+
+CMD:
+ssh -p 2222 xdr@localhost -> Conectar Windows a Máquina Virtual
+docker run -it --rm --name some-hstream-cli --network host hstreamdb/hstream:latest hstream --port 6570 sql
+
+HSTREAM:
+- Productor:
+CREATE STREAM prueba; -> Se crea el stream (tabla) llamado "prueba"
+
+- Consumidor:
+SELECT * FROM prueba EMIT CHANGES; -> Seleccionamos todos los campos (*) del stream "prueba" para ver cuando se introducen
+
+- Productor:
+(Insertar datos)
+INSERT INTO prueba (nombre, edad) VALUES ("Juan", 30); -> Se insertan los campos "nombre" y "edad" en el stream "prueba" con los valores "Juan" y "30" respectivamente

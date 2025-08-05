@@ -1,0 +1,155 @@
+-- Construimos las tablas
+-- SEGURO_VIAJE
+CREATE TABLE IF NOT EXISTS SEGURO_VIAJE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    caducidad DATE NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    cancelacion BOOLEAN NOT NULL,
+    tipo ENUM('Básico', 'A todo riesgo') NOT NULL
+);
+
+-- VIAJE
+CREATE TABLE IF NOT EXISTS VIAJE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    precio DECIMAL(10, 2) NOT NULL,
+    duracion TIMESTAMP NOT NULL,
+    transporte ENUM('Coche', 'Tren', 'Barco', 'Avión', 'Otro') NOT NULL
+);
+
+-- NACIONAL
+CREATE TABLE IF NOT EXISTS NACIONAL (
+    idViaje INT AUTO_INCREMENT PRIMARY KEY,
+    dni VARCHAR(9) NOT NULL,
+    FOREIGN KEY (idViaje) REFERENCES VIAJE(id) ON DELETE CASCADE
+);
+
+-- INTERNACIONAL
+CREATE TABLE IF NOT EXISTS INTERNACIONAL (
+    idViaje INT AUTO_INCREMENT PRIMARY KEY,
+    pasaporte VARCHAR(15) NOT NULL,
+    visado ENUM('Vigente', 'Vencido', 'En trámite', 'No requerido'),
+    FOREIGN KEY (idViaje) REFERENCES VIAJE(id) ON DELETE CASCADE
+);
+
+-- CLIENTE
+CREATE TABLE IF NOT EXISTS CLIENTE (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    edad INT NOT NULL,
+    genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+    idSeguro INT NOT NULL,
+    idViaje INT NOT NULL,
+    fecha DATE NOT NULL,
+    FOREIGN KEY (idSeguro) REFERENCES SEGURO_VIAJE(id) ON DELETE CASCADE,
+    FOREIGN KEY (idViaje) REFERENCES VIAJE(id) ON DELETE CASCADE
+);
+
+-- RECOMIENDA
+CREATE TABLE IF NOT EXISTS RECOMIENDA (
+    idCliente INT NOT NULL,
+    idRecomendado INT NOT NULL,
+    PRIMARY KEY (idCliente, idRecomendado),
+    FOREIGN KEY (idCliente) REFERENCES CLIENTE(id) ON DELETE CASCADE,
+    FOREIGN KEY (idRecomendado) REFERENCES CLIENTE(id) ON DELETE CASCADE
+);
+
+-- PAQUETE_VACACIONAL
+CREATE TABLE IF NOT EXISTS PAQUETE_VACACIONAL (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    n_destinos INT NOT NULL
+);
+
+-- DESTINO
+CREATE TABLE IF NOT EXISTS DESTINO (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pais VARCHAR(20) NOT NULL,
+    alojamiento VARCHAR(100) NOT NULL
+);
+
+-- INCLUYE
+CREATE TABLE IF NOT EXISTS INCLUYE (
+    idPaquete INT NOT NULL,
+    idDestino INT NOT NULL,
+    PRIMARY KEY (idPaquete, idDestino),
+    FOREIGN KEY (idPaquete) REFERENCES PAQUETE_VACACIONAL(id) ON DELETE CASCADE,
+    FOREIGN KEY (idDestino) REFERENCES DESTINO(id) ON DELETE CASCADE
+);
+
+-- ACTIVIDAD
+CREATE TABLE IF NOT EXISTS ACTIVIDAD (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    duracion TIMESTAMP NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    idViaje INT NOT NULL,
+    FOREIGN KEY (idViaje) REFERENCES VIAJE(id) ON DELETE CASCADE
+);
+
+-- GUIA
+CREATE TABLE IF NOT EXISTS GUIA (
+    idActividad INT NOT NULL,
+    genero ENUM('Masculino', 'Femenino', 'Otro') NOT NULL,
+    edad INT(2) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    PRIMARY KEY (idActividad), 
+    FOREIGN KEY (idActividad) REFERENCES ACTIVIDAD(id) ON DELETE CASCADE
+);
+
+-- Insertamos datos en las tablas:
+-- SEGURO_VIAJE
+INSERT INTO SEGURO_VIAJE (caducidad, precio, cancelacion, tipo)
+VALUES ('2024-12-31', 100.00, TRUE, 'Básico'),
+       ('2024-12-31', 200.00, FALSE, 'A todo riesgo');
+
+-- VIAJE
+INSERT INTO VIAJE (precio, duracion, transporte)
+VALUES (500.00, '2024-06-15 10:00:00', 'Avión'),
+       (300.00, '2024-07-20 08:00:00', 'Tren');
+
+-- NACIONAL
+INSERT INTO NACIONAL (dni, idViaje)
+VALUES ('12345678A', 1),
+       ('87654321B', 2);
+
+-- INTERNACIONAL
+INSERT INTO INTERNACIONAL (pasaporte, visado, idViaje)
+VALUES ('ABC123', 'Vigente', 1),
+       ('XYZ789', 'En trámite', 2);
+
+-- CLIENTE
+INSERT INTO CLIENTE (nombre, edad, genero, idSeguro, idViaje, fecha)
+VALUES ('Juan', 30, 'Masculino', 1, 1, '2024-05-01'),
+       ('María', 25, 'Femenino', 2, 2, '2024-05-02');
+
+-- RECOMIENDA
+INSERT INTO RECOMIENDA (idCliente, idRecomendado)
+VALUES (1, 2),
+       (2, 1);
+
+-- PAQUETE_VACACIONAL
+INSERT INTO PAQUETE_VACACIONAL (n_destinos)
+VALUES (3),
+       (2);
+
+-- DESTINO
+INSERT INTO DESTINO (pais, alojamiento)
+VALUES ('España', 'Hotel Playa'),
+       ('Italia', 'Apartamento Roma'),
+       ('Francia', 'Cabaña Montaña');
+
+-- INCLUYE
+INSERT INTO INCLUYE (idPaquete, idDestino)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (2, 1),
+       (2, 2);
+
+-- ACTIVIDAD
+INSERT INTO ACTIVIDAD (duracion, precio, idViaje)
+VALUES ('2024-06-16 14:00:00', 50.00, 1),
+       ('2024-07-21 09:00:00', 30.00, 2);
+
+-- GUIA
+INSERT INTO GUIA (idActividad, genero, edad, nombre)
+VALUES (1, 'Masculino', 35, 'Pedro'),
+       (2, 'Femenino', 28, 'Ana');

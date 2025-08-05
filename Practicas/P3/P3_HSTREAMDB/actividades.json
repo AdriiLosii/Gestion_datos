@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "0001",
+        "duracion": "ISODate(\"2024-06-16T14:00:00Z\")",
+        "precio": 50,
+        "guia": {
+            "nombre": "Pedro",
+            "edad": 35,
+            "genero": "Masculino"
+        }
+    },
+    {
+        "_id": "0002",
+        "duracion": "ISODate(\"2024-07-21T09:00:00Z\")",
+        "precio": 30,
+        "guia": {
+            "nombre": "Ana",
+            "edad": 28,
+            "genero": "Femenino"
+        }
+    }
+]

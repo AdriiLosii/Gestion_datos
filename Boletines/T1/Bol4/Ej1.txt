@@ -1,0 +1,45 @@
+-- Creamos la base de datos
+CREATE DATABASE IF NOT EXISTS proveedor_piezas;
+
+-- Usamos la base de datos creada
+USE proveedor_piezas;
+
+-- Creamos las tablas:
+-- TABLA PROVEEDOR
+CREATE TABLE IF NOT EXISTS PROVEEDOR (
+	id INT NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    direccion VARCHAR(50) NOT NULL,
+    ciudad VARCHAR(20) NOT NULL,
+    provincia VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- TABLA CATEGORIA
+CREATE TABLE IF NOT EXISTS CATEGORIA (
+	id INT NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- TABLA PIEZA
+CREATE TABLE IF NOT EXISTS PIEZA (
+	id INT NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    color VARCHAR(20) NOT NULL,
+    precio DECIMAL(3,2) NOT NULL,
+    idCategoria INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (idCategoria) REFERENCES CATEGORIA(id)
+);
+
+-- TABLA SUMINISTRA
+CREATE TABLE IF NOT EXISTS SUMINISTRA (
+	idProveedor INT NOT NULL,
+    idPieza INT NOT NULL,
+    fecha VARCHAR(20) NOT NULL,
+    cantidad INT NOT NULL,
+    PRIMARY KEY (idProveedor, idPieza),
+    FOREIGN KEY (idProveedor) REFERENCES PROVEEDOR(id),
+    FOREIGN KEY (idPieza) REFERENCES PIEZA(id)
+);

@@ -1,0 +1,93 @@
+-- Creamos la base de datos
+CREATE DATABASE IF NOT EXISTS proyectos_investigacion;
+
+-- Utilizamos la base de datos creada
+USE proyectos_investigacion;
+
+-- Creamos las tablas:
+-- TABLA PROFESOR
+CREATE TABLE IF NOT EXISTS PROFESOR(
+	id INT NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    apellido1 VARCHAR(20) NOT NULL,
+    apellido2 VARCHAR(20) NOT NULL,
+    despacho VARCHAR(20) NOT NULL,
+    telefono VARCHAR(9) NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- TABLA PROYECTO_INVESTIGACION
+CREATE TABLE IF NOT EXISTS PROYECTO_INVESTIGACION(
+	id INT NOT NULL,
+    nombre VARCHAR(20) NOT NULL,
+    presupuesto DECIMAL(5,2) NOT NULL,
+    programa VARCHAR(20) NOT NULL,
+    f_inicio DATE NOT NULL,
+    f_fin DATE NOT NULL,
+    descripcion VARCHAR(50) NOT NULL,
+    idDoctor INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (idDoctor) REFERENCES PROFESOR(id)
+);
+
+-- TABLA TRABAJA
+CREATE TABLE IF NOT EXISTS TRABAJA(
+	idProyecto INT NOT NULL,
+    idProfesor INT NOT NULL,
+    f_inicio DATE NOT NULL,
+    f_fin DATE NOT NULL,
+	PRIMARY KEY (idProyecto, idProfesor, f_inicio),
+    FOREIGN KEY (idProyecto) REFERENCES PROYECTO_INVESTIGACION(id),
+    FOREIGN KEY (idProfesor) REFERENCES PROFESOR(id)
+);
+
+-- TABLA PUBLICACION
+CREATE TABLE IF NOT EXISTS PUBLICACION(
+	id INT NOT NULL,
+    titulo VARCHAR(20) NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+-- TABLA ESCRIBE
+CREATE TABLE IF NOT EXISTS ESCRIBE(
+	idProfesor INT NOT NULL,
+    idPublicacion INT NOT NULL,
+    PRIMARY KEY (idProfesor, idPublicacion),
+    FOREIGN KEY (idProfesor) REFERENCES PROFESOR(id),
+    FOREIGN KEY (idPublicacion) REFERENCES PUBLICACION(id)
+);
+
+-- TABLA SUPERVISA
+CREATE TABLE IF NOT EXISTS SUPERVISA(
+	idDoctor INT NOT NULL,
+    idNoDoctor INT NOT NULL,
+    PRIMARY KEY (idDoctor, idNoDoctor),
+    FOREIGN KEY (idDoctor) REFERENCES PROFESOR(id),
+    FOREIGN KEY (idNoDoctor) REFERENCES PROFESOR(id)
+);
+
+-- TABLA REVISTA
+CREATE TABLE IF NOT EXISTS REVISTA(
+	idPublicacion INT NOT NULL,
+    volumen INT NOT NULL,
+    numero INT NOT NULL,
+    pag_inicio INT NOT NULL,
+    pag_fin INT NOT NULL,
+    PRIMARY KEY (idPublicacion),
+    FOREIGN KEY (idPublicacion) REFERENCES PUBLICACION(id)
+);
+
+-- TABLA CONGRESO
+CREATE TABLE IF NOT EXISTS CONGRESO(
+	idPublicacion INT NOT NULL,
+    congreso VARCHAR(20) NOT NULL,
+    ciudad VARCHAR(20) NOT NULL,
+    pais VARCHAR(20) NOT NULL,
+    f_inicio DATE NOT NULL,
+    f_fin DATE NOT NULL,
+    editorial VARCHAR(20) NOT NULL,
+    PRIMARY KEY (idPublicacion),
+    FOREIGN KEY (idPublicacion) REFERENCES PUBLICACION(id)
+);

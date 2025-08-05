@@ -1,0 +1,36 @@
+1.
+db.empleados.find({},{nombre:1})
+
+2.
+db.empleados.find({salario:{$gt:1500}},{nombre:1,apellidos:1}) 
+
+3.
+db.empleados.find({edad:{$gt:35},salario:{$gte:1800}},{}).count()
+
+4.
+db.empleados.find({$and:[{edad:{$gt:40}},{edad:{$lt:50}}]},{apellidos:1, nombre:1}).sort({"apellidos.0":-1,nombre:1})
+
+5.
+db.empleado.find({"sucursal.ciudad":"Madrid"},{nombre:1, apellidos:1, salario:1}).skip(1).sort({edad:-1})
+
+6.
+db.empleados.find({"telefono.1":{$exists:true}},{nombre:1,"telefono.número":1})
+
+7.
+db.empleados.find({"apellidos":{$regex:"^R"}},{nombre:1,apellidos:1,telefono:{$slice:1}})
+
+8.
+db.empleados.update({"sucursal.ciudad":"Madrid"},{$inc:{salario:300}},{multi:true})
+
+9.
+db.empleados.update({nombre:"Pedro"},{$set:{email:["psrodriguez@empresa.org"]}}) 
+db.empleados.update({nombre:"Miriam"},{$set:{email:["msdiaz@empresa.org"]}}) 
+db.empleados.update({nombre:"Ana"},{$set:{email:["argonzalez@empresa.org"]}}) 
+db.empleados.update({nombre:"Maria"},{$set:{email:["mlrodriguez@empresa.org"]}})
+
+10.
+db.empleados.update({nombre:"Miriam"},{$addToSet:{email:"miriam.saez.diaz@gmail.org"}})
+db.empleados.update({nombre:"Pedro"},{$addToSet:{email:"pedro.sanchez.rodriguez@hotmail.com"}})
+
+11.
+db.empleados.update({nombre:"Maria",email:"mlrodriguez@empresa.org"},{$set:{"email.$":"maria.rodriguez@empresa.org"}})
